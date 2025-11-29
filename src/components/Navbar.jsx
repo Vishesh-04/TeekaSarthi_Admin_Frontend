@@ -1,16 +1,15 @@
 import React from 'react'
 import { FiLogOut } from 'react-icons/fi'
-import mockUser from '../mock/mockUser'
+import { useAuth } from '../context/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 export default function Navbar() {
-  const user = mockUser
+  const { user, logout } = useAuth()
+  const navigate = useNavigate()
 
-  // Temporary logout handler (until real auth is integrated)
   const handleLogout = () => {
-    // clear any temp user/token from localStorage
-    localStorage.removeItem('user')
-    localStorage.removeItem('token')
-    alert('Logout is disabled in mock mode.\nAuthentication is not implemented yet.')
+    logout()
+    navigate('/login')
   }
 
   return (
